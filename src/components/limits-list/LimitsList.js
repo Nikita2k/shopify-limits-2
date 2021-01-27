@@ -2,13 +2,17 @@ import React from 'react';
 import { useStore } from 'effector-react';
 import { Card, Button, ButtonGroup, Stack } from '@shopify/polaris';
 
-import { $limits, deleteLimit } from '../root-component/model';
+import { $limits, deleteLimit, addRule } from '../root-component/model';
 
 const LimitsList = () => {
   const limits = useStore($limits);
 
   const handleLimitDelete = (idArg) => {
     deleteLimit(idArg);
+  };
+
+  const handleLimitAdd = (idArg) => {
+    addRule(idArg);
   };
 
   const renderLimitCards = (limitsArg) => {
@@ -23,7 +27,7 @@ const LimitsList = () => {
                 Delete
               </Button>
             </ButtonGroup>
-            <Button>Add rule</Button>
+            <Button onClick={() => handleLimitAdd(id)}>Add rule</Button>
           </Stack>
         </Card>
       );
