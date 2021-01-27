@@ -29,7 +29,7 @@ const LimitsList = () => {
                 Delete
               </Button>
             </ButtonGroup>
-            {rules.length ? <RulesList /> : null}
+            {rules.length ? <RulesList limitId={id} /> : null}
             <Button onClick={() => handleRuleAdd(id)}>Add rule</Button>
           </Stack>
         </Card>
