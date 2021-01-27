@@ -19,10 +19,12 @@ const RulesList = ({ limitId }) => {
     return rulesList.map((rule, ruleIndex) => {
       return (
         <div key={ruleIndex}>
-          <EntityDisplayMatcher />
-          <button onClick={() => handleDeleteRule(limitId, ruleIndex)}>
-            Delete
-          </button>
+          <Stack>
+            <EntityDisplayMatcher rule={rule} />
+            <button onClick={() => handleDeleteRule(limitId, ruleIndex)}>
+              Delete
+            </button>
+          </Stack>
         </div>
       );
     });
