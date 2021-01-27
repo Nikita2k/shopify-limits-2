@@ -2,8 +2,6 @@ import React from 'react';
 
 import { Card } from '@shopify/polaris';
 
-import '@shopify/polaris/dist/styles.css';
-
 const HeaderTitle = () => {
   return (
     <Card sectioned>
