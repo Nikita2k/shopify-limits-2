@@ -1,12 +1,13 @@
 import React from 'react';
-
 import { Button, Stack } from '@shopify/polaris';
+
+import { addLimit } from '../root-component/model';
 
 import './style.css';
 
 const AddLimitButton = () => {
   const handleAddLimit = () => {
-    console.log('add');
+    addLimit();
   };
 
   return (
