@@ -13,6 +13,7 @@ export const addLimit = createEvent();
 export const deleteLimit = createEvent();
 
 export const addRule = createEvent();
+export const deleteRule = createEvent();
 
 export const $limits = createStore(initialState);
 
@@ -27,6 +28,13 @@ $limits
     return state.map((limit) => {
       if (limit.id !== limitId) return limit;
       limit.rules.push(defaultRule);
+      return limit;
+    });
+  })
+  .on(deleteRule, (state, { limitIdArg, ruleIndexArg }) => {
+    return state.map((limit) => {
+      if (limit.id !== limitIdArg) return limit;
+      limit.rules = limit.rules.filter((rule, index) => index !== ruleIndexArg);
       return limit;
     });
   });
