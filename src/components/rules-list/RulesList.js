@@ -18,7 +18,7 @@ const RulesList = ({ limitId }) => {
 
   const renderRules = (rulesList) => {
     return rulesList.map((rule, ruleIndex) => {
-      const { entity } = rule;
+      const { entity, condition } = rule;
       return (
         <div key={ruleIndex}>
           <Stack>
@@ -27,7 +27,12 @@ const RulesList = ({ limitId }) => {
               limitId={limitId}
               ruleIndex={ruleIndex}
             />
-            <EntityDisplayMatcher rule={rule} />
+            <EntityDisplayMatcher
+              entity={entity}
+              condition={condition}
+              limitId={limitId}
+              ruleIndex={ruleIndex}
+            />
             <button onClick={() => handleDeleteRule(limitId, ruleIndex)}>
               Delete
             </button>

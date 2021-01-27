@@ -13,6 +13,7 @@ export const addRule = createEvent();
 export const deleteRule = createEvent();
 
 export const updateRuleType = createEvent();
+export const updateCondition = createEvent();
 
 export const $limits = createStore(initialState);
 
@@ -26,8 +27,10 @@ $limits
   .on(addRule, (state, limitId) => {
     return state.map((limit) => {
       if (limit.id !== limitId) return limit;
-      limit.rules.push(defaultRule);
-      return limit;
+      return {
+        ...limit,
+        rules: [...limit.rules, defaultRule],
+      };
     });
   })
   .on(deleteRule, (state, { limitIdArg, ruleIndexArg }) => {
@@ -47,8 +50,27 @@ $limits
       });
       return limit;
     });
+  })
+  .on(updateCondition, (state, { condition, limitId, ruleIndex }) => {
+    console.log('state', state);
+    return state.map((limit) => {
+      if (limit.id !== limitId) return limit;
+      console.log('old rules', limit.rules);
+      const updatedRules = limit.rules.map((rule, index) => {
+        if (index !== ruleIndex) {
+          console.log(rule.condition);
+          return rule;
+        }
+        rule.condition = condition;
+        console.log(rule.condition);
+        return rule;
+      });
+      limit.rules = updatedRules;
+      console.log(updatedRules);
+      return limit;
+    });
   });
 
 $limits.watch((state) => {
-  console.log(state);
+  // console.log(state);
 });
