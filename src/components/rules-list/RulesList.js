@@ -3,6 +3,7 @@ import { useStore } from 'effector-react';
 import { Stack } from '@shopify/polaris';
 
 import EntityDisplayMatcher from '../entity-display-matcher';
+import EntitySelect from '../entity-select';
 import { $limits, deleteRule } from '../root-component/model';
 
 const RulesList = ({ limitId }) => {
@@ -17,9 +18,15 @@ const RulesList = ({ limitId }) => {
 
   const renderRules = (rulesList) => {
     return rulesList.map((rule, ruleIndex) => {
+      const { entity } = rule;
       return (
         <div key={ruleIndex}>
           <Stack>
+            <EntitySelect
+              entity={entity}
+              limitId={limitId}
+              ruleIndex={ruleIndex}
+            />
             <EntityDisplayMatcher rule={rule} />
             <button onClick={() => handleDeleteRule(limitId, ruleIndex)}>
               Delete
