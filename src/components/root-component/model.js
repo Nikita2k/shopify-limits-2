@@ -1,19 +1,18 @@
 import { createEvent, createStore } from 'effector';
 import { v4 as uuidv4 } from 'uuid';
 
-const initialState = [];
+import { getDefaultRule } from '../utils';
+import { defaultRule, testStateInput } from '../auxInformation';
 
-const defaultRule = {
-  entity: 'cart_price',
-  condition: 'less_than',
-  value: '333',
-};
+const initialState = [];
 
 export const addLimit = createEvent();
 export const deleteLimit = createEvent();
 
 export const addRule = createEvent();
 export const deleteRule = createEvent();
+
+export const updateRuleType = createEvent();
 
 export const $limits = createStore(initialState);
 
@@ -35,6 +34,17 @@ $limits
     return state.map((limit) => {
       if (limit.id !== limitIdArg) return limit;
       limit.rules = limit.rules.filter((rule, index) => index !== ruleIndexArg);
+      return limit;
+    });
+  })
+  .on(updateRuleType, (state, { entity, limitId, ruleIndex }) => {
+    const defaultRuleForEntity = getDefaultRule(entity);
+    return state.map((limit) => {
+      if (limit.id !== limitId) return limit;
+      limit.rules = limit.rules.map((rule, index) => {
+        if (index !== ruleIndex) return rule;
+        return defaultRuleForEntity;
+      });
       return limit;
     });
   });
