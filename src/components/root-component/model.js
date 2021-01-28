@@ -29,7 +29,7 @@ $limits
       if (limit.id !== limitId) return limit;
       return {
         ...limit,
-        rules: [...limit.rules, defaultRule],
+        rules: [...limit.rules, { ...defaultRule }],
       };
     });
   })
