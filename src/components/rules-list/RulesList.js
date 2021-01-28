@@ -1,10 +1,13 @@
 import React from 'react';
 import { useStore } from 'effector-react';
-import { Stack } from '@shopify/polaris';
+import { Stack, Icon } from '@shopify/polaris';
+import { DeleteMajor } from '@shopify/polaris-icons';
 
 import EntityDisplayMatcher from '../entity-display-matcher';
 import EntitySelect from '../entity-select';
 import { $limits, deleteRule } from '../root-component/model';
+
+import './style.css';
 
 const RulesList = ({ limitId }) => {
   const limits = useStore($limits);
@@ -20,7 +23,7 @@ const RulesList = ({ limitId }) => {
       const { entity, condition, value } = rule;
       return (
         <div key={ruleIndex}>
-          <Stack>
+          <Stack alignment='center'>
             <EntitySelect
               entity={entity}
               limitId={limitId}
@@ -33,9 +36,12 @@ const RulesList = ({ limitId }) => {
               ruleIndex={ruleIndex}
               value={value}
             />
-            <button onClick={() => handleDeleteRule(limitId, ruleIndex)}>
-              Delete
-            </button>
+            <span
+              className='delete-icon'
+              onClick={() => handleDeleteRule(limitId, ruleIndex)}
+            >
+              <Icon source={DeleteMajor} />
+            </span>
           </Stack>
         </div>
       );
