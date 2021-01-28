@@ -1,17 +1,20 @@
 import React from 'react';
+import { Stack } from '@shopify/polaris';
 
 import ConditionSelect from '../condition-select';
+import NumberInput from '../value-input';
 
-const CartPriceRule = ({ condition, limitId, ruleIndex }) => {
+const CartPriceRule = ({ condition, value, limitId, ruleIndex }) => {
   return (
-    <div>
+    <Stack>
       <ConditionSelect
         conditionType='quantity'
         condition={condition}
         limitId={limitId}
         ruleIndex={ruleIndex}
       />
-    </div>
+      <NumberInput value={value} limitId={limitId} ruleIndex={ruleIndex} />
+    </Stack>
   );
 };
 

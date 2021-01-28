@@ -17,7 +17,7 @@ const RulesList = ({ limitId }) => {
 
   const renderRules = (rulesList) => {
     return rulesList.map((rule, ruleIndex) => {
-      const { entity, condition } = rule;
+      const { entity, condition, value } = rule;
       return (
         <div key={ruleIndex}>
           <Stack>
@@ -31,6 +31,7 @@ const RulesList = ({ limitId }) => {
               condition={condition}
               limitId={limitId}
               ruleIndex={ruleIndex}
+              value={value}
             />
             <button onClick={() => handleDeleteRule(limitId, ruleIndex)}>
               Delete

@@ -2,7 +2,13 @@ import React from 'react';
 
 import CartPriceRule from '../cart-price-rule';
 
-const EntityDisplayMatcher = ({ entity, condition, limitId, ruleIndex }) => {
+const EntityDisplayMatcher = ({
+  entity,
+  condition,
+  limitId,
+  ruleIndex,
+  value,
+}) => {
   switch (entity) {
     case 'cart_price':
       return (
@@ -10,6 +16,7 @@ const EntityDisplayMatcher = ({ entity, condition, limitId, ruleIndex }) => {
           condition={condition}
           limitId={limitId}
           ruleIndex={ruleIndex}
+          value={value}
         />
       );
     default:
