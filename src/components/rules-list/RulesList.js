@@ -24,11 +24,13 @@ const RulesList = ({ limitId }) => {
       return (
         <div key={ruleIndex}>
           <Stack alignment='center'>
-            <EntitySelect
-              entity={entity}
-              limitId={limitId}
-              ruleIndex={ruleIndex}
-            />
+            <div className='rule-selector'>
+              <EntitySelect
+                entity={entity}
+                limitId={limitId}
+                ruleIndex={ruleIndex}
+              />
+            </div>
             <EntityDisplayMatcher
               entity={entity}
               condition={condition}
