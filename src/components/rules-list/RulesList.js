@@ -12,7 +12,6 @@ const RulesList = ({ limitId }) => {
   const { rules } = limits.find((limit) => limit.id === limitId);
 
   const handleDeleteRule = (limitIdArg, ruleIndexArg) => {
-    console.log(limitIdArg, ruleIndexArg);
     deleteRule({ limitIdArg, ruleIndexArg });
   };
 

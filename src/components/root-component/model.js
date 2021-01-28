@@ -2,7 +2,7 @@ import { createEvent, createStore } from 'effector';
 import { v4 as uuidv4 } from 'uuid';
 
 import { getDefaultRule } from '../utils';
-import { defaultRule, testStateInput } from '../auxInformation';
+import { defaultRule } from '../auxInformation';
 
 const initialState = [];
 
@@ -52,21 +52,16 @@ $limits
     });
   })
   .on(updateCondition, (state, { condition, limitId, ruleIndex }) => {
-    console.log('state', state);
     return state.map((limit) => {
       if (limit.id !== limitId) return limit;
-      console.log('old rules', limit.rules);
       const updatedRules = limit.rules.map((rule, index) => {
         if (index !== ruleIndex) {
-          console.log(rule.condition);
           return rule;
         }
         rule.condition = condition;
-        console.log(rule.condition);
         return rule;
       });
       limit.rules = updatedRules;
-      console.log(updatedRules);
       return limit;
     });
   });
