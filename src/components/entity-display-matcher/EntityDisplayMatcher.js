@@ -2,6 +2,7 @@ import React from 'react';
 
 import CartPriceRule from '../cart-price-rule';
 import TextBasedRule from '../text-based-rule';
+import ProductsListRule from '../products-list-rule';
 
 const EntityDisplayMatcher = ({
   entity,
@@ -11,6 +12,8 @@ const EntityDisplayMatcher = ({
   value,
 }) => {
   switch (entity) {
+    case 'has_one_of_products':
+      return <ProductsListRule />;
     case 'cart_price':
       return (
         <CartPriceRule
