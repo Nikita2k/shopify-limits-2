@@ -1,6 +1,7 @@
 import React from 'react';
 
 import CartPriceRule from '../cart-price-rule';
+import TextBasedRule from '../text-based-rule';
 
 const EntityDisplayMatcher = ({
   entity,
@@ -14,9 +15,21 @@ const EntityDisplayMatcher = ({
       return (
         <CartPriceRule
           condition={condition}
+          value={value}
           limitId={limitId}
           ruleIndex={ruleIndex}
+        />
+      );
+    case 'product_title':
+    case 'sku':
+    case 'vendor':
+    case 'collection':
+      return (
+        <TextBasedRule
+          condition={condition}
           value={value}
+          limitId={limitId}
+          ruleIndex={ruleIndex}
         />
       );
     default:
