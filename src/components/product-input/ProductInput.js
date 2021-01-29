@@ -1,72 +1,54 @@
 import React from 'react';
 import AsyncSelect from 'react-select/async';
-import Async from 'react-select/async';
 
-const ProductInput = ({ onChangeProp, multi, value }) => {
-  const loadProducts = (input, callback) => {
-    setTimeout(function () {
-      callback(null, {
-        options: [
-          {
-            id: '11978396623',
-            title: '5 Panel Camp Cap',
-            handle: '5-panel-hat',
-          },
-        ],
-        complete: true,
-      });
-    }, 5000);
-  };
+import './style.css';
 
-  const onChange = (product) => {
-    onChangeProp(product);
-  };
+const goodsOptions = [
+  {
+    id: '1',
+    label: 'book',
+    value: 'book',
+  },
+  {
+    id: '2',
+    label: '5 Panel Camp Cap',
+    value: '5-panel-hat',
+  },
+  {
+    id: '3',
+    label: 'x box',
+    value: 'x-box',
+  },
+];
 
+const filterGoods = (inputValue) => {
+  return goodsOptions.filter((i) =>
+    i.label.toLowerCase().includes(inputValue.toLowerCase())
+  );
+};
+
+const promiseOptions = (inputValue) =>
+  new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(filterGoods(inputValue));
+    }, 100);
+  });
+
+const handleProductSelect = (product) => {
+  console.log(product);
+};
+
+const ProductInput = () => {
   return (
-    <Async
-      name='product'
-      loadOptions={loadProducts}
-      multi={multi || false}
-      value={value}
-      valueKey='id'
-      labelKey='title'
-      onChange={onChange}
-      loadingPlaceholder='Enter the product name'
-      placeholder='Enter the product name'
-    />
+    <div className='product-input'>
+      <AsyncSelect
+        cacheOptions
+        defaultOptions
+        loadOptions={promiseOptions}
+        onChange={handleProductSelect}
+      />
+    </div>
   );
 };
 
 export default ProductInput;
-
-// class ProductInput extends Component {
-//   constructor(props) {
-//     super(props);
-//   }
-
-//   // асинхронно загружает продукты фильтруя по названию (input)
-//   // вызывает callback по результату
-//   loadProducts(input, callback) {
-//     setTimeout(function() { callback(null, {options:[{"id":"11978396623","title":"5 Panel Camp Cap","handle":"5-panel-hat"}], complete:true}); }, 5000);
-//   }
-
-//   onChange(product) {
-//     this.props.onChange(product);
-//   }
-
-//   render() {
-//     return (
-//         <Async
-//             name="product"
-//             loadOptions={this.loadProducts.bind(this)}
-//             multi={this.props.multi || false}
-//             value={this.props.value}
-//             valueKey="id" labelKey="title"
-//             onChange={this.onChange.bind(this)}
-//             loadingPlaceholder="Enter the product name"
-//             placeholder="Enter the product name"
-//         />
-//     )
-//   }
-
-// }
