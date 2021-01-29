@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import AsyncSelect from 'react-select/async';
 
 import './style.css';
@@ -34,18 +34,29 @@ const promiseOptions = (inputValue) =>
     }, 100);
   });
 
-const handleProductSelect = (product) => {
-  console.log(product);
-};
-
 const ProductInput = () => {
+  const [zIndex, setZIndex] = useState(100);
+
+  const handleZIndexIncrease = () => {
+    setZIndex(101);
+  };
+
+  const handleZIndexDecrease = () => {
+    setZIndex(100);
+  };
+
+  const handleProductSelect = (product) => {
+    console.log(product);
+  };
   return (
-    <div className='product-input'>
+    <div className='product-input' style={{ zIndex: zIndex }}>
       <AsyncSelect
         cacheOptions
         defaultOptions
         loadOptions={promiseOptions}
         onChange={handleProductSelect}
+        onFocus={handleZIndexIncrease}
+        onBlur={handleZIndexDecrease}
       />
     </div>
   );

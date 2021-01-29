@@ -91,3 +91,10 @@ export const testStateInput = [
     ],
   },
 ];
+
+// TODO: use uuid to generate random id for newly created object
+export const defaultProductInputValue = {
+  id: 'random-id',
+  label: '',
+  value: '',
+};

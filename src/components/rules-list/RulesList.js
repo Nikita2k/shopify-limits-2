@@ -23,7 +23,7 @@ const RulesList = ({ limitId }) => {
       const { entity, condition, value } = rule;
       return (
         <div key={ruleIndex}>
-          <Stack alignment='center'>
+          <Stack>
             <div className='rule-selector'>
               <EntitySelect
                 entity={entity}

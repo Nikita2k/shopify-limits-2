@@ -13,7 +13,13 @@ const EntityDisplayMatcher = ({
 }) => {
   switch (entity) {
     case 'has_one_of_products':
-      return <ProductsListRule value={value} />;
+      return (
+        <ProductsListRule
+          value={value}
+          limitId={limitId}
+          ruleIndex={ruleIndex}
+        />
+      );
     case 'cart_price':
       return (
         <CartPriceRule
