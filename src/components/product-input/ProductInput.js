@@ -1,5 +1,10 @@
 import React, { useState } from 'react';
 import AsyncSelect from 'react-select/async';
+import { Stack, Icon } from '@shopify/polaris';
+
+import { MobileCancelMajor } from '@shopify/polaris-icons';
+
+import { deleteProductInputField } from '../root-component/model';
 
 import './style.css';
 
@@ -34,7 +39,7 @@ const promiseOptions = (inputValue) =>
     }, 100);
   });
 
-const ProductInput = () => {
+const ProductInput = ({ productObj, limitId, ruleIndex }) => {
   const [zIndex, setZIndex] = useState(100);
 
   const handleZIndexIncrease = () => {
@@ -48,17 +53,33 @@ const ProductInput = () => {
   const handleProductSelect = (product) => {
     console.log(product);
   };
+
+  const handleDeleteProductInput = () => {
+    console.log('value', productObj);
+    deleteProductInputField({
+      limitId,
+      ruleIndex,
+      productInputId: productObj.id,
+    });
+  };
+
   return (
-    <div className='product-input' style={{ zIndex: zIndex }}>
-      <AsyncSelect
-        cacheOptions
-        defaultOptions
-        loadOptions={promiseOptions}
-        onChange={handleProductSelect}
-        onFocus={handleZIndexIncrease}
-        onBlur={handleZIndexDecrease}
-      />
-    </div>
+    <Stack alignment='center'>
+      <div className='product-input' style={{ zIndex: zIndex }}>
+        <AsyncSelect
+          value={productObj}
+          cacheOptions
+          defaultOptions
+          loadOptions={promiseOptions}
+          onChange={handleProductSelect}
+          onFocus={handleZIndexIncrease}
+          onBlur={handleZIndexDecrease}
+        />
+      </div>
+      <span onClick={handleDeleteProductInput}>
+        <Icon source={MobileCancelMajor} />
+      </span>
+    </Stack>
   );
 };
 

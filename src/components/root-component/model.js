@@ -2,7 +2,7 @@ import { createEvent, createStore } from 'effector';
 import { v4 as uuidv4 } from 'uuid';
 
 import { getDefaultRule } from '../utils';
-import { defaultRule, defaultProductInputValue } from '../auxInformation';
+import { defaultRule } from '../auxInformation';
 
 const initialState = [];
 
@@ -17,6 +17,7 @@ export const updateCondition = createEvent();
 export const updateValue = createEvent();
 
 export const addProductInputField = createEvent();
+export const deleteProductInputField = createEvent();
 
 export const $limits = createStore(initialState);
 
@@ -83,6 +84,11 @@ $limits
     });
   })
   .on(addProductInputField, (state, { limitId, ruleIndex }) => {
+    const defaultProductInputValue = {
+      id: uuidv4(),
+      label: '',
+      value: '',
+    };
     return state.map((limit) => {
       if (limit.id !== limitId) return limit;
       limit.rules.map((rule, index) => {
@@ -92,7 +98,24 @@ $limits
       });
       return limit;
     });
-  });
+  })
+  .on(
+    deleteProductInputField,
+    (state, { limitId, ruleIndex, productInputId }) => {
+      console.log(limitId, ruleIndex, productInputId);
+      return state.map((limit) => {
+        if (limit.id !== limitId) return limit;
+        limit.rules = limit.rules.map((rule, index) => {
+          if (index !== ruleIndex) return rule;
+          rule.value = rule.value.filter(
+            (productObj) => productObj.id !== productInputId
+          );
+          return rule;
+        });
+        return limit;
+      });
+    }
+  );
 
 $limits.watch((state) => {
   console.log(state);
