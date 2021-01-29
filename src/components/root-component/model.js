@@ -18,6 +18,7 @@ export const updateValue = createEvent();
 
 export const addProductInputField = createEvent();
 export const deleteProductInputField = createEvent();
+export const setValueForProjectInput = createEvent();
 
 export const $limits = createStore(initialState);
 
@@ -102,7 +103,6 @@ $limits
   .on(
     deleteProductInputField,
     (state, { limitId, ruleIndex, productInputId }) => {
-      console.log(limitId, ruleIndex, productInputId);
       return state.map((limit) => {
         if (limit.id !== limitId) return limit;
         limit.rules = limit.rules.map((rule, index) => {
@@ -110,6 +110,23 @@ $limits
           rule.value = rule.value.filter(
             (productObj) => productObj.id !== productInputId
           );
+          return rule;
+        });
+        return limit;
+      });
+    }
+  )
+  .on(
+    setValueForProjectInput,
+    (state, { limitId, ruleIndex, productInputId, selectedProduct }) => {
+      return state.map((limit) => {
+        if (limit.id !== limitId) return limit;
+        limit.rules = limit.rules.map((rule, index) => {
+          if (index !== ruleIndex) return rule;
+          rule.value = rule.value.map((productObj) => {
+            if (productObj.id !== productInputId) return productObj;
+            return selectedProduct;
+          });
           return rule;
         });
         return limit;

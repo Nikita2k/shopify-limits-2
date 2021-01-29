@@ -4,7 +4,10 @@ import { Stack, Icon } from '@shopify/polaris';
 
 import { MobileCancelMajor } from '@shopify/polaris-icons';
 
-import { deleteProductInputField } from '../root-component/model';
+import {
+  deleteProductInputField,
+  setValueForProjectInput,
+} from '../root-component/model';
 
 import './style.css';
 
@@ -51,7 +54,12 @@ const ProductInput = ({ productObj, limitId, ruleIndex }) => {
   };
 
   const handleProductSelect = (product) => {
-    console.log(product);
+    setValueForProjectInput({
+      limitId,
+      ruleIndex,
+      productInputId: productObj.id,
+      selectedProduct: product,
+    });
   };
 
   const handleDeleteProductInput = () => {
