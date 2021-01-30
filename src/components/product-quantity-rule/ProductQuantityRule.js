@@ -1,19 +1,31 @@
 import React from 'react';
 import { Stack, Button } from '@shopify/polaris';
 
-import { addProductQuantityRule } from '../root-component/model';
+import {
+  addProductQuantityRule,
+  deleteProductInputFieldInQuantityRule,
+} from '../root-component/model';
 import ProductQuantityRuleItem from '../product-quantity-rule-item';
 
 const ProductQuantityRule = ({ value, limitId, ruleIndex }) => {
   const ruleItems = [];
 
   for (let i = 0; i < value.length; i++) {
+    const deleteHandlerForProductInput = () => {
+      deleteProductInputFieldInQuantityRule({
+        limitId,
+        ruleIndex,
+        productInputId: value[i].product.id,
+      });
+    };
+
     ruleItems.push(
       <ProductQuantityRuleItem
         key='i'
         ruleItem={value[i]}
         limitId={limitId}
         ruleIndex={ruleIndex}
+        deleteHandlerForProductInput={deleteHandlerForProductInput}
       />
     );
   }
