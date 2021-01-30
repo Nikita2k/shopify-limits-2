@@ -8,7 +8,14 @@ const ProductQuantityRule = ({ value, limitId, ruleIndex }) => {
   const ruleItems = [];
 
   for (let i = 0; i < value.length; i++) {
-    ruleItems.push(<ProductQuantityRuleItem key='i' />);
+    ruleItems.push(
+      <ProductQuantityRuleItem
+        key='i'
+        ruleItem={value[i]}
+        limitId={limitId}
+        ruleIndex={ruleIndex}
+      />
+    );
   }
 
   const handleAddQuantityRule = () => {
