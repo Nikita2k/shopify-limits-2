@@ -3,7 +3,7 @@ import React from 'react';
 import CartPriceRule from '../cart-price-rule';
 import TextBasedRule from '../text-based-rule';
 import ProductsListRule from '../products-list-rule';
-import ProductQuantity from '../product-quantity';
+import ProductQuantityRule from '../product-quantity-rule';
 
 const EntityDisplayMatcher = ({
   entity,
@@ -23,7 +23,7 @@ const EntityDisplayMatcher = ({
       );
     case 'product_quantity':
       return (
-        <ProductQuantity
+        <ProductQuantityRule
           value={value}
           limitId={limitId}
           ruleIndex={ruleIndex}

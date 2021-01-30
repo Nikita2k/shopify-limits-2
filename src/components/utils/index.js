@@ -13,7 +13,7 @@ export const getDefaultRule = (entity) => {
     case 'product_quantity':
       return {
         entity,
-        condition: 'greater',
+        condition: null,
         value: [],
       };
     case 'cart_price':

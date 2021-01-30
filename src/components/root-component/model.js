@@ -20,6 +20,8 @@ export const addProductInputField = createEvent();
 export const deleteProductInputField = createEvent();
 export const setValueForProjectInput = createEvent();
 
+export const addProductQuantityRule = createEvent();
+
 export const $limits = createStore(initialState);
 
 $limits
@@ -128,7 +130,23 @@ $limits
         return limit;
       });
     }
-  );
+  )
+  .on(addProductQuantityRule, (state, { limitId, ruleIndex }) => {
+    const defaultProductInputValue = makeDefaultProductInputValue();
+
+    return state.map((limit) => {
+      if (limit.id !== limitId) return limit;
+      limit.rules = limit.rules.map((rule, index) => {
+        if (index !== ruleIndex) return rule;
+        rule.value = [
+          ...rule.value,
+          { product: defaultProductInputValue, condition: 'greater', value: 1 },
+        ];
+        return rule;
+      });
+      return limit;
+    });
+  });
 
 $limits.watch((state) => {
   console.log(state);
