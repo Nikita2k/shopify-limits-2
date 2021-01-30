@@ -1,4 +1,5 @@
 import { defaultRule } from '../auxInformation';
+import { v4 as uuidv4 } from 'uuid';
 
 export const getDefaultRule = (entity) => {
   switch (entity) {
@@ -13,7 +14,7 @@ export const getDefaultRule = (entity) => {
       return {
         entity,
         condition: 'greater',
-        value: '1',
+        value: [],
       };
     case 'cart_price':
       return defaultRule;
@@ -29,4 +30,13 @@ export const getDefaultRule = (entity) => {
     default:
       return defaultRule;
   }
+};
+
+export const makeDefaultProductInputValue = () => {
+  const defaultProductInputValue = {
+    id: uuidv4(),
+    label: '',
+    value: '',
+  };
+  return defaultProductInputValue;
 };

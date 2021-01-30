@@ -1,7 +1,7 @@
 import { createEvent, createStore } from 'effector';
 import { v4 as uuidv4 } from 'uuid';
 
-import { getDefaultRule } from '../utils';
+import { getDefaultRule, makeDefaultProductInputValue } from '../utils';
 import { defaultRule } from '../auxInformation';
 
 const initialState = [];
@@ -85,11 +85,7 @@ $limits
     });
   })
   .on(addProductInputField, (state, { limitId, ruleIndex }) => {
-    const defaultProductInputValue = {
-      id: uuidv4(),
-      label: '',
-      value: '',
-    };
+    const defaultProductInputValue = makeDefaultProductInputValue();
     return state.map((limit) => {
       if (limit.id !== limitId) return limit;
       limit.rules.map((rule, index) => {
