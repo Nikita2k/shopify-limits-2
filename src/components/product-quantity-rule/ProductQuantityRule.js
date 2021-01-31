@@ -4,6 +4,7 @@ import { Stack, Button } from '@shopify/polaris';
 import {
   addProductQuantityRule,
   deleteProductInputFieldInQuantityRule,
+  setProductForQuantityRule,
 } from '../root-component/model';
 import ProductQuantityRuleItem from '../product-quantity-rule-item';
 
@@ -11,6 +12,15 @@ const ProductQuantityRule = ({ value, limitId, ruleIndex }) => {
   const ruleItems = [];
 
   for (let i = 0; i < value.length; i++) {
+    const selectionHandlerForProductInput = (selectedProduct) => {
+      setProductForQuantityRule({
+        limitId,
+        ruleIndex,
+        productInputId: value[i].product.id,
+        selectedProduct,
+      });
+    };
+
     const deleteHandlerForProductInput = () => {
       deleteProductInputFieldInQuantityRule({
         limitId,
@@ -26,6 +36,7 @@ const ProductQuantityRule = ({ value, limitId, ruleIndex }) => {
         limitId={limitId}
         ruleIndex={ruleIndex}
         deleteHandlerForProductInput={deleteHandlerForProductInput}
+        selectionHandlerForProductInput={selectionHandlerForProductInput}
       />
     );
   }

@@ -44,6 +44,7 @@ const ProductInput = ({
   limitId,
   ruleIndex,
   deleteHandlerForProductInput,
+  selectionHandlerForProductInput,
 }) => {
   const [zIndex, setZIndex] = useState(100);
 
@@ -56,12 +57,7 @@ const ProductInput = ({
   };
 
   const handleProductSelect = (product) => {
-    setValueForProjectInput({
-      limitId,
-      ruleIndex,
-      productInputId: productObj.id,
-      selectedProduct: product,
-    });
+    selectionHandlerForProductInput(product);
   };
 
   const handleDeleteProductInput = () => {

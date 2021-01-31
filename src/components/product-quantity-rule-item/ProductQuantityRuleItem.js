@@ -10,6 +10,7 @@ const ProductQuantityRuleItem = ({
   limitId,
   ruleIndex,
   deleteHandlerForProductInput,
+  selectionHandlerForProductInput,
 }) => {
   const { product, condition, value } = valueItem;
 
@@ -29,6 +30,7 @@ const ProductQuantityRuleItem = ({
         limitId={limitId}
         ruleIndex={ruleIndex}
         deleteHandlerForProductInput={deleteHandlerForProductInput}
+        selectionHandlerForProductInput={selectionHandlerForProductInput}
       />
       <Select
         options={quantityMatchers}

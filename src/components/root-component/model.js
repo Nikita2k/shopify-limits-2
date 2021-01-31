@@ -23,6 +23,7 @@ export const setValueForProjectInput = createEvent();
 export const addProductQuantityRule = createEvent();
 export const deleteProductInputFieldInQuantityRule = createEvent();
 export const setConditionForQuantityRule = createEvent();
+export const setProductForQuantityRule = createEvent();
 
 export const $limits = createStore(initialState);
 
@@ -168,7 +169,6 @@ $limits
   .on(
     setConditionForQuantityRule,
     (state, { condition, limitId, ruleIndex, valueItem }) => {
-      console.log({ condition, limitId, ruleIndex, valueItem });
       return state.map((limit) => {
         if (limit.id !== limitId) return limit;
         limit.rules = limit.rules.map((rule, index) => {
@@ -178,6 +178,24 @@ $limits
               return savedValueItem;
             savedValueItem.condition = condition;
             return savedValueItem;
+          });
+          return rule;
+        });
+        return limit;
+      });
+    }
+  )
+  .on(
+    setProductForQuantityRule,
+    (state, { limitId, ruleIndex, productInputId, selectedProduct }) => {
+      return state.map((limit) => {
+        if (limit.id !== limitId) return limit;
+        limit.rules = limit.rules.map((rule, index) => {
+          if (index !== ruleIndex) return rule;
+          rule.value = rule.value.map((savedItem) => {
+            if (savedItem.product.id !== productInputId) return savedItem;
+            savedItem.product = selectedProduct;
+            return savedItem;
           });
           return rule;
         });
