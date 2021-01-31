@@ -30,6 +30,12 @@ const LimitsList = () => {
     addRule(idArg);
   };
 
+  const handleSaveLimit = (limit) => {
+    // TODO: send newly created or updated limit to server
+    console.log('send newly created or updated limit to server');
+    console.log(limit);
+  };
+
   const renderLimitCards = (limitsArg) => {
     return limitsArg.map((limit) => {
       const { id, rules } = limit;
@@ -37,7 +43,7 @@ const LimitsList = () => {
         <Card sectioned key={id}>
           <Stack vertical={true} spacing='loose'>
             <ButtonGroup segmented>
-              <Button>Save</Button>
+              <Button onClick={() => handleSaveLimit(limit)}>Save</Button>
               <Button>Set Alert Text</Button>
               <Button destructive onClick={() => handleLimitDelete(id)}>
                 Delete

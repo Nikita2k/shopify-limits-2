@@ -21,7 +21,6 @@ const RulesList = ({ limitId }) => {
   const renderRules = (rulesList) => {
     return rulesList.map((rule, ruleIndex) => {
       const { entity, condition, value } = rule;
-      console.log(rule);
       return (
         <div key={ruleIndex} className='rule'>
           <Stack>
