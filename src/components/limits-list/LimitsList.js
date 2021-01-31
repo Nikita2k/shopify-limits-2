@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useStore } from 'effector-react';
 import { Card, Button, ButtonGroup, Stack } from '@shopify/polaris';
 
@@ -15,15 +15,31 @@ import { setLoading } from '../spinner/model';
 const LimitsList = () => {
   const limits = useStore($limits);
 
+  const [limitsIdsFromServer, setLimitsIdsFromServer] = useState([]);
+
   useEffect(() => {
     setLoading(true);
-    fetchLimits()
-      .then((data) => setFetchedLimits(data))
-      .finally(() => setLoading(false));
+    fetchLimits().then((data) => {
+      setFetchedLimits(data);
+
+      const fetchedLimitsIds = [];
+
+      data.forEach((limit) => fetchedLimitsIds.push(limit.id));
+      setLimitsIdsFromServer(fetchedLimitsIds);
+
+      setLoading(false);
+    });
   }, []);
 
   const handleLimitDelete = (idArg) => {
-    deleteLimit(idArg);
+    if (limitsIdsFromServer.includes(idArg)) {
+      // TODO: send request to server to delete limit
+      console.log('Send request to server to delete limit');
+      deleteLimit(idArg);
+    } else {
+      console.log('Delete limit only locally');
+      deleteLimit(idArg);
+    }
   };
 
   const handleRuleAdd = (idArg) => {
