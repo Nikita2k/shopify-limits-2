@@ -22,7 +22,7 @@ const ProductQuantityRule = ({ value, limitId, ruleIndex }) => {
     ruleItems.push(
       <ProductQuantityRuleItem
         key='i'
-        ruleItem={value[i]}
+        valueItem={value[i]}
         limitId={limitId}
         ruleIndex={ruleIndex}
         deleteHandlerForProductInput={deleteHandlerForProductInput}

@@ -1,20 +1,39 @@
 import React from 'react';
+import { Select } from '@shopify/polaris';
+
+import { quantityMatchers } from '../auxInformation';
 import ProductInput from '../product-input';
+import { setConditionForQuantityRule } from '../root-component/model';
 
 const ProductQuantityRuleItem = ({
-  ruleItem,
+  valueItem,
   limitId,
   ruleIndex,
   deleteHandlerForProductInput,
 }) => {
-  console.log(ruleItem);
+  const { product, condition, value } = valueItem;
+
+  const handleSelectChange = (value) => {
+    setConditionForQuantityRule({
+      condition: value,
+      limitId,
+      ruleIndex,
+      valueItem,
+    });
+  };
+
   return (
     <div>
       <ProductInput
-        productObj={ruleItem.product}
+        productObj={valueItem.product}
         limitId={limitId}
         ruleIndex={ruleIndex}
         deleteHandlerForProductInput={deleteHandlerForProductInput}
+      />
+      <Select
+        options={quantityMatchers}
+        value={condition}
+        onChange={handleSelectChange}
       />
     </div>
   );
