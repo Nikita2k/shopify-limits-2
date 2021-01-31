@@ -1,30 +1,11 @@
 import React, { useState } from 'react';
 import AsyncSelect from 'react-select/async';
 import { Stack, Icon } from '@shopify/polaris';
-
 import { MobileCancelMajor } from '@shopify/polaris-icons';
 
-import { setValueForProjectInput } from '../root-component/model';
+import { goodsOptions } from '../auxInformation';
 
 import './style.css';
-
-const goodsOptions = [
-  {
-    id: '1',
-    label: 'book',
-    value: 'book',
-  },
-  {
-    id: '2',
-    label: '5 Panel Camp Cap',
-    value: '5-panel-hat',
-  },
-  {
-    id: '3',
-    label: 'x box',
-    value: 'x-box',
-  },
-];
 
 const filterGoods = (inputValue) => {
   return goodsOptions.filter((i) =>
@@ -41,8 +22,6 @@ const promiseOptions = (inputValue) =>
 
 const ProductInput = ({
   productObj,
-  limitId,
-  ruleIndex,
   deleteHandlerForProductInput,
   selectionHandlerForProductInput,
 }) => {

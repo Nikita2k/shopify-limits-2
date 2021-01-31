@@ -91,3 +91,21 @@ export const testStateInput = [
     ],
   },
 ];
+
+export const goodsOptions = [
+  {
+    id: '1',
+    label: 'book',
+    value: 'book',
+  },
+  {
+    id: '2',
+    label: '5 Panel Camp Cap',
+    value: '5-panel-hat',
+  },
+  {
+    id: '3',
+    label: 'x box',
+    value: 'x-box',
+  },
+];
