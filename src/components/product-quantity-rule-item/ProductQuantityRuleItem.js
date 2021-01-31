@@ -1,9 +1,12 @@
 import React from 'react';
-import { Select } from '@shopify/polaris';
+import { Select, TextField } from '@shopify/polaris';
 
 import { quantityMatchers } from '../auxInformation';
 import ProductInput from '../product-input';
-import { setConditionForQuantityRule } from '../root-component/model';
+import {
+  setConditionForQuantityRule,
+  setValueForQuantityRule,
+} from '../root-component/model';
 
 const ProductQuantityRuleItem = ({
   valueItem,
@@ -23,6 +26,9 @@ const ProductQuantityRuleItem = ({
     });
   };
 
+  const handleValueChange = (newValue) =>
+    setValueForQuantityRule({ value: newValue, limitId, ruleIndex, valueItem });
+
   return (
     <div>
       <ProductInput
@@ -37,6 +43,7 @@ const ProductQuantityRuleItem = ({
         value={condition}
         onChange={handleSelectChange}
       />
+      <TextField value={value} onChange={handleValueChange} />
     </div>
   );
 };
