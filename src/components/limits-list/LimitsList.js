@@ -1,12 +1,22 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useStore } from 'effector-react';
 import { Card, Button, ButtonGroup, Stack } from '@shopify/polaris';
 
 import RulesList from '../rules-list';
-import { $limits, deleteLimit, addRule } from '../root-component/model';
+import { fetchLimits } from '../Api/fetchLimits';
+import {
+  $limits,
+  deleteLimit,
+  addRule,
+  setFetchedLimits,
+} from '../root-component/model';
 
 const LimitsList = () => {
   const limits = useStore($limits);
+
+  useEffect(() => {
+    fetchLimits().then((data) => setFetchedLimits(data));
+  }, []);
 
   const handleLimitDelete = (idArg) => {
     deleteLimit(idArg);

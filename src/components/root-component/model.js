@@ -6,6 +6,8 @@ import { defaultRule } from '../auxInformation';
 
 const initialState = [];
 
+export const setFetchedLimits = createEvent();
+
 export const addLimit = createEvent();
 export const deleteLimit = createEvent();
 
@@ -29,6 +31,7 @@ export const setProductForQuantityRule = createEvent();
 export const $limits = createStore(initialState);
 
 $limits
+  .on(setFetchedLimits, (_, fetchedLimits) => fetchedLimits)
   .on(addLimit, (state) => {
     return [...state, { id: uuidv4(), rules: [] }];
   })
