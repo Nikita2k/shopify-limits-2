@@ -10,12 +10,16 @@ import {
   addRule,
   setFetchedLimits,
 } from '../root-component/model';
+import { setLoading } from '../spinner/model';
 
 const LimitsList = () => {
   const limits = useStore($limits);
 
   useEffect(() => {
-    fetchLimits().then((data) => setFetchedLimits(data));
+    setLoading(true);
+    fetchLimits()
+      .then((data) => setFetchedLimits(data))
+      .finally(() => setLoading(false));
   }, []);
 
   const handleLimitDelete = (idArg) => {
