@@ -4,5 +4,11 @@
 }
 
 .delete-icon {
+  margin-top: 8px;
   cursor: pointer;
+}
+
+.rule {
+  padding-bottom: 15px;
+  border-bottom: 1px dashed black;
 }

@@ -23,7 +23,7 @@ const RulesList = ({ limitId }) => {
       const { entity, condition, value } = rule;
       console.log(rule);
       return (
-        <div key={ruleIndex}>
+        <div key={ruleIndex} className='rule'>
           <Stack>
             <div className='rule-selector'>
               <EntitySelect
@@ -39,12 +39,12 @@ const RulesList = ({ limitId }) => {
               ruleIndex={ruleIndex}
               value={value}
             />
-            <span
+            <div
               className='delete-icon'
               onClick={() => handleDeleteRule(limitId, ruleIndex)}
             >
               <Icon source={DeleteMajor} />
-            </span>
+            </div>
           </Stack>
         </div>
       );

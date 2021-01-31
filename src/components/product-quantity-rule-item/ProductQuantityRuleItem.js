@@ -1,5 +1,5 @@
 import React from 'react';
-import { Select, TextField } from '@shopify/polaris';
+import { Select, TextField, Stack } from '@shopify/polaris';
 
 import { quantityMatchers } from '../auxInformation';
 import ProductInput from '../product-input';
@@ -8,6 +8,8 @@ import {
   setValueForQuantityRule,
 } from '../root-component/model';
 
+import './style.css';
+
 const ProductQuantityRuleItem = ({
   valueItem,
   limitId,
@@ -15,7 +17,7 @@ const ProductQuantityRuleItem = ({
   deleteHandlerForProductInput,
   selectionHandlerForProductInput,
 }) => {
-  const { product, condition, value } = valueItem;
+  const { condition, value } = valueItem;
 
   const handleSelectChange = (value) => {
     setConditionForQuantityRule({
@@ -30,7 +32,7 @@ const ProductQuantityRuleItem = ({
     setValueForQuantityRule({ value: newValue, limitId, ruleIndex, valueItem });
 
   return (
-    <div>
+    <Stack vertical={true}>
       <ProductInput
         productObj={valueItem.product}
         limitId={limitId}
@@ -38,13 +40,17 @@ const ProductQuantityRuleItem = ({
         deleteHandlerForProductInput={deleteHandlerForProductInput}
         selectionHandlerForProductInput={selectionHandlerForProductInput}
       />
-      <Select
-        options={quantityMatchers}
-        value={condition}
-        onChange={handleSelectChange}
-      />
-      <TextField value={value} onChange={handleValueChange} />
-    </div>
+      <Stack>
+        <div className='quantity-rule-select'>
+          <Select
+            options={quantityMatchers}
+            value={condition}
+            onChange={handleSelectChange}
+          />
+        </div>
+        <TextField value={value} onChange={handleValueChange} />
+      </Stack>
+    </Stack>
   );
 };
 
